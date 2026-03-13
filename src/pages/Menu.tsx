@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Utensils, Star, CheckCircle2, ChevronRight, ArrowRight } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';

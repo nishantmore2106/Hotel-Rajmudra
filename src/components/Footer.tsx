@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Instagram, Facebook, Map } from 'lucide-react';
 
 export const Footer = () => {

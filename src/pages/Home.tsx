@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Twitter, Utensils, Star, MapPin, Clock, Info, Phone, Mail, Map } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { IMAGES } from '../../images';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ArrowDown, MapPin, Clock, Phone, Mail, Star, CheckCircle2, ChevronRight } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';

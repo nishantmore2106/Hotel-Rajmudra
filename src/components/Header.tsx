@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Instagram, Facebook } from 'lucide-react';
+import { motion, AnimatePresence } from 'rom 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 export const Header = () => {
