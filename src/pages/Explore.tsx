@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, MapPin, Clock, Phone, Mail, Star, CheckCircle2, ChevronRight } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { useLanguage, FadeText } from '../LanguageContext';
 
 const SIGNATURE_DISHES = [
-  { name: 'Misal Pav', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800' },
-  { name: 'Kolhapuri Chicken', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
-  { name: 'Dilkhush Kabab', image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800' },
-  { name: 'Maharashtrian Thali', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800' },
-  { name: 'Butter Chicken', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
-  { name: 'Tandoori Chicken', image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800' },
+  { name: { en: 'Misal Pav', mr: 'मिसळ पाव' }, image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800' },
+  { name: { en: 'Kolhapuri Chicken', mr: 'कोल्हापुरी चिकन' }, image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
+  { name: { en: 'Dilkhush Kabab', mr: 'दिलखुश कबाब' }, image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800' },
+  { name: { en: 'Maharashtrian Thali', mr: 'महाराष्ट्रीयन थाळी' }, image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800' },
+  { name: { en: 'Butter Chicken', mr: 'बटर चिकन' }, image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
+  { name: { en: 'Tandoori Chicken', mr: 'तंदुरी चिकन' }, image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800' },
 ];
 
 const AMBIENCE_IMAGES = [
@@ -22,6 +23,12 @@ const AMBIENCE_IMAGES = [
 ];
 
 export default function Explore() {
+  const { language, t } = useLanguage();
+
+  useEffect(() => {
+    document.title = `${t('hotel_name')} | ${t('nav_explore')}`;
+  }, [t]);
+
   return (
     <div className="bg-[#0B0B0F] text-[#F5F1E8] font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
       <Header />
@@ -49,10 +56,10 @@ export default function Explore() {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-8xl font-display font-black tracking-tighter uppercase leading-[0.9] mb-6"
+            className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-6"
           >
-            Explore<br />
-            <span className="text-brand-accent">Hotel Rajmudra</span>
+            <FadeText>{t('explore_hero_title')}</FadeText><br />
+            <span className="text-brand-accent"><FadeText>{t('explore_hero_highlight')}</FadeText></span>
           </motion.h1>
           
           <motion.p
@@ -61,7 +68,7 @@ export default function Explore() {
             transition={{ duration: 1, delay: 0.5 }}
             className="text-lg md:text-xl text-[#F5F1E8]/80 font-medium tracking-wide mb-10 max-w-2xl mx-auto"
           >
-            Experience authentic Maharashtrian hospitality on the Mumbai–Goa Highway.
+            <FadeText>{t('explore_hero_sub')}</FadeText>
           </motion.p>
 
           <motion.div
@@ -72,15 +79,17 @@ export default function Explore() {
           >
             <button 
               onClick={() => window.open('/menu', '_blank')}
-              className="w-full sm:w-auto px-10 py-4 bg-brand-accent text-brand-bg font-black uppercase tracking-widest rounded-full hover:scale-105 transition-transform"
+              className="group relative px-10 py-4 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-widest text-sm rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent w-full sm:w-auto"
             >
-              View Menu
+              <span className="relative z-10 group-hover:text-[#0B0B0F] transition-colors duration-500"><FadeText>{t('view_menu')}</FadeText></span>
+              <div className="absolute inset-0 bg-brand-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             </button>
             <button 
               onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=Hotel+Rajmudra+Poladpur', '_blank')}
-              className="w-full sm:w-auto px-10 py-4 border border-white/20 text-[#F5F1E8] font-black uppercase tracking-widest rounded-full hover:bg-white/5 transition-colors"
+              className="group relative px-10 py-4 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-widest text-sm rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent w-full sm:w-auto"
             >
-              Get Directions
+              <span className="relative z-10 group-hover:text-[#0B0B0F] transition-colors duration-500"><FadeText>{t('get_directions')}</FadeText></span>
+              <div className="absolute inset-0 bg-brand-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             </button>
           </motion.div>
         </div>
@@ -110,6 +119,7 @@ export default function Explore() {
                 alt="Dining Space" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
+                loading="lazy"
               />
             </div>
             <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-brand-accent/10 blur-[60px] rounded-full" />
@@ -121,21 +131,21 @@ export default function Explore() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block">The Ambience</span>
-            <h2 className="text-4xl md:text-6xl font-display font-black uppercase tracking-tighter leading-[1] md:leading-[0.9] mb-8">
-              A Comfortable Highway Dining Experience
+            <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block"><FadeText>{t('ambience_kicker')}</FadeText></span>
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[1] md:leading-[0.9] mb-8">
+              <FadeText>{t('ambience_title')}</FadeText>
             </h2>
             <p className="text-[#F5F1E8]/60 text-lg leading-relaxed mb-10">
-              Hotel Rajmudra offers travelers a relaxing and hygienic dining environment with authentic Maharashtrian cuisine. Located conveniently on the Mumbai–Goa Highway in Poladpur, it has become a favorite stop for families, travelers, and food lovers.
+              <FadeText>{t('ambience_desc')}</FadeText>
             </p>
             <div className="grid grid-cols-2 gap-8">
               <div>
                 <h4 className="text-brand-accent text-3xl font-black mb-1">15+</h4>
-                <p className="text-xs font-bold uppercase tracking-widest text-[#F5F1E8]/40">Years Legacy</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#F5F1E8]/40"><FadeText>{t('years_legacy')}</FadeText></p>
               </div>
               <div>
                 <h4 className="text-brand-accent text-3xl font-black mb-1">50k+</h4>
-                <p className="text-xs font-bold uppercase tracking-widest text-[#F5F1E8]/40">Happy Guests</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#F5F1E8]/40"><FadeText>{t('happy_guests')}</FadeText></p>
               </div>
             </div>
           </motion.div>
@@ -146,8 +156,8 @@ export default function Explore() {
       <section className="py-20 md:py-32 px-4 md:px-6 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block">Our Specialties</span>
-            <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">Signature Dishes</h2>
+            <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block"><FadeText>{t('specialties_kicker')}</FadeText></span>
+            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter"><FadeText>{t('specialties_title')}</FadeText></h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -162,13 +172,14 @@ export default function Explore() {
               >
                 <img 
                   src={dish.image} 
-                  alt={dish.name} 
+                  alt={dish.name.en} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                   <h3 className="text-2xl font-black uppercase tracking-tighter text-brand-accent">
-                    {dish.name}
+                    <FadeText>{dish.name[language]}</FadeText>
                   </h3>
                 </div>
               </motion.div>
@@ -182,11 +193,11 @@ export default function Explore() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20">
             <div className="max-w-2xl">
-              <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block">Gallery</span>
-              <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">Restaurant Ambience</h2>
+              <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block"><FadeText>{t('gallery_kicker')}</FadeText></span>
+              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter"><FadeText>{t('gallery_title')}</FadeText></h2>
             </div>
             <p className="text-[#F5F1E8]/40 text-sm font-bold uppercase tracking-widest mb-2">
-              Scroll to explore our space
+              <FadeText>{t('scroll_explore')}</FadeText>
             </p>
           </div>
 
@@ -196,7 +207,7 @@ export default function Explore() {
                 whileHover={{ scale: 1.02 }}
                 className="h-full rounded-3xl overflow-hidden shadow-2xl border border-white/5"
               >
-                <img src={AMBIENCE_IMAGES[0].url} alt={AMBIENCE_IMAGES[0].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={AMBIENCE_IMAGES[0].url} alt={AMBIENCE_IMAGES[0].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
             </div>
             <div className="col-span-2">
@@ -204,7 +215,7 @@ export default function Explore() {
                 whileHover={{ scale: 1.02 }}
                 className="aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/5"
               >
-                <img src={AMBIENCE_IMAGES[1].url} alt={AMBIENCE_IMAGES[1].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={AMBIENCE_IMAGES[1].url} alt={AMBIENCE_IMAGES[1].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
             </div>
             <div>
@@ -212,7 +223,7 @@ export default function Explore() {
                 whileHover={{ scale: 1.02 }}
                 className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/5"
               >
-                <img src={AMBIENCE_IMAGES[2].url} alt={AMBIENCE_IMAGES[2].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={AMBIENCE_IMAGES[2].url} alt={AMBIENCE_IMAGES[2].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
             </div>
             <div>
@@ -220,7 +231,7 @@ export default function Explore() {
                 whileHover={{ scale: 1.02 }}
                 className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/5"
               >
-                <img src={AMBIENCE_IMAGES[3].url} alt={AMBIENCE_IMAGES[3].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={AMBIENCE_IMAGES[3].url} alt={AMBIENCE_IMAGES[3].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
             </div>
             <div className="col-span-2 md:col-span-4">
@@ -228,7 +239,7 @@ export default function Explore() {
                 whileHover={{ scale: 1.02 }}
                 className="aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border border-white/5"
               >
-                <img src={AMBIENCE_IMAGES[4].url} alt={AMBIENCE_IMAGES[4].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={AMBIENCE_IMAGES[4].url} alt={AMBIENCE_IMAGES[4].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
             </div>
           </div>
@@ -239,14 +250,14 @@ export default function Explore() {
       <section className="py-20 md:py-32 px-4 md:px-6 bg-brand-accent/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter">Why People Love Rajmudra</h2>
+            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter"><FadeText>{t('why_love_title')}</FadeText></h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: 'Authentic Maharashtrian Food', text: 'Traditional recipes and authentic spices used in every dish.' },
-              { title: 'Clean & Hygienic', text: 'Maintained cleanliness and comfortable dining for your peace of mind.' },
-              { title: 'Perfect Highway Stop', text: 'Ideal place for travelers between Mumbai and Goa to rest and refuel.' }
+              { title: { en: 'Authentic Maharashtrian Food', mr: 'अस्सल महाराष्ट्रीयन जेवण' }, text: { en: 'Traditional recipes and authentic spices used in every dish.', mr: 'प्रत्येक डिशमध्ये वापरल्या जाणाऱ्या पारंपारिक पाककृती आणि अस्सल मसाले.' } },
+              { title: { en: 'Clean & Hygienic', mr: 'स्वच्छ आणि आरोग्यदायी' }, text: { en: 'Maintained cleanliness and comfortable dining for your peace of mind.', mr: 'तुमच्या मनःशांतीसाठी स्वच्छता आणि आरामदायी जेवणाची व्यवस्था.' } },
+              { title: { en: 'Perfect Highway Stop', mr: 'परफेक्ट हायवे स्टॉप' }, text: { en: 'Ideal place for travelers between Mumbai and Goa to rest and refuel.', mr: 'मुंबई आणि गोवा दरम्यानच्या प्रवाशांसाठी विश्रांती आणि ताजेतवाने होण्यासाठी आदर्श ठिकाण.' } }
             ].map((feature, i) => (
               <motion.div
                 key={i}
@@ -259,8 +270,8 @@ export default function Explore() {
                 <div className="w-16 h-16 rounded-2xl bg-brand-accent/10 flex items-center justify-center mb-8 group-hover:bg-brand-accent transition-colors">
                   <CheckCircle2 className="w-8 h-8 text-brand-accent group-hover:text-brand-bg transition-colors" />
                 </div>
-                <h3 className="text-2xl font-black uppercase tracking-tighter mb-4">{feature.title}</h3>
-                <p className="text-[#F5F1E8]/60 leading-relaxed">{feature.text}</p>
+                <h3 className="text-2xl font-black uppercase tracking-tighter mb-4"><FadeText>{feature.title[language]}</FadeText></h3>
+                <p className="text-[#F5F1E8]/60 leading-relaxed"><FadeText>{feature.text[language]}</FadeText></p>
               </motion.div>
             ))}
           </div>
@@ -272,8 +283,8 @@ export default function Explore() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
             <div>
-              <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block">Location</span>
-              <h2 className="text-4xl md:text-7xl font-display font-black uppercase tracking-tighter mb-12">Visit Us</h2>
+              <span className="text-brand-accent font-black uppercase tracking-[0.3em] text-sm mb-4 block"><FadeText>{t('location_kicker')}</FadeText></span>
+              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-12"><FadeText>{t('location_title')}</FadeText></h2>
               
               <div className="space-y-10">
                 <div className="flex items-start gap-6">
@@ -281,10 +292,10 @@ export default function Explore() {
                     <MapPin className="w-6 h-6 text-brand-accent" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-black uppercase tracking-tighter mb-2">Address</h4>
+                    <h4 className="text-xl font-black uppercase tracking-tighter mb-2"><FadeText>{t('address')}</FadeText></h4>
                     <p className="text-[#F5F1E8]/60 leading-relaxed">
-                      Mumbai - Goa Hwy<br />
-                      Poladpur, Maharashtra 402303
+                      <FadeText>{t('address_text').split(',')[0]}</FadeText><br />
+                      <FadeText>{t('address_text').split(',').slice(1).join(',')}</FadeText>
                     </p>
                   </div>
                 </div>
@@ -294,10 +305,10 @@ export default function Explore() {
                     <Clock className="w-6 h-6 text-brand-accent" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-black uppercase tracking-tighter mb-2">Hours</h4>
+                    <h4 className="text-xl font-black uppercase tracking-tighter mb-2"><FadeText>{t('hours')}</FadeText></h4>
                     <p className="text-[#F5F1E8]/60 leading-relaxed">
-                      7:00 AM — 11:30 PM<br />
-                      Open All Days
+                      <FadeText>{t('opening_hours')}</FadeText><br />
+                      <FadeText>{t('open_all_days')}</FadeText>
                     </p>
                   </div>
                 </div>
@@ -307,7 +318,7 @@ export default function Explore() {
                     <Phone className="w-6 h-6 text-brand-accent" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-black uppercase tracking-tighter mb-2">Contact</h4>
+                    <h4 className="text-xl font-black uppercase tracking-tighter mb-2"><FadeText>{t('contact')}</FadeText></h4>
                     <p className="text-[#F5F1E8]/60 leading-relaxed">
                       +91 XXXXX XXXXX<br />
                       info@hotelrajmudra.com
@@ -317,7 +328,7 @@ export default function Explore() {
               </div>
             </div>
 
-            <div className="h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-white/5 grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-white/5 grayscale hover:grayscale-0 transition-all duration-700 relative">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.88123456789!2d73.468123456789!3d17.98123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDU4JzUyLjQiTiA3M8KwMjgnMDUuMiJF!5e0!3m2!1sen!2sin!4v1234567890123" 
                 width="100%" 
@@ -336,15 +347,16 @@ export default function Explore() {
       <section className="py-20 md:py-32 px-4 md:px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-brand-accent opacity-[0.02]" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter leading-[0.9] mb-12">
-            Stop by and Experience<br />
-            <span className="text-brand-accent">Hotel Rajmudra</span>
+          <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] mb-12">
+            <FadeText>{t('stop_by')}</FadeText><br />
+            <span className="text-brand-accent"><FadeText>{t('explore_hero_highlight')}</FadeText></span>
           </h2>
           <button 
             onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=Hotel+Rajmudra+Poladpur', '_blank')}
-            className="px-16 py-6 bg-brand-accent text-brand-bg font-black uppercase tracking-[0.2em] rounded-full hover:scale-105 transition-transform shadow-[0_0_40px_rgba(244,163,0,0.2)]"
+            className="group relative px-16 py-6 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent"
           >
-            Get Directions
+            <span className="relative z-10 group-hover:text-[#0B0B0F] transition-colors duration-500"><FadeText>{t('get_directions')}</FadeText></span>
+            <div className="absolute inset-0 bg-brand-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
           </button>
         </div>
       </section>
