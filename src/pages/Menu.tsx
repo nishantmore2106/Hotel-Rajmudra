@@ -176,13 +176,13 @@ export default function MenuPage() {
   })).filter(category => category.items.length > 0);
 
   return (
-    <div className="min-h-screen bg-brand-bg text-[#2D241E] font-sans pb-20">
+    <div className="min-h-screen bg-[#F7F1E3] text-[#2D241E] font-sans pb-20">
       <Header />
       
       {/* Background Decor */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-20">
-        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-brand-accent/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-brand-accent/5 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-[#F15A24]/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-[#F15A24]/5 blur-[120px] rounded-full" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-12">
@@ -201,9 +201,9 @@ export default function MenuPage() {
             transition={{ delay: 0.2 }}
             className="flex items-center justify-center gap-4 text-brand-accent font-bold tracking-widest uppercase text-sm"
           >
-            <div className="h-px w-8 bg-brand-accent/30" />
+            <div className="h-px w-8 bg-[#F15A24]/30" />
             <FadeText>Authentic Culinary Journey</FadeText>
-            <div className="h-px w-8 bg-brand-accent/30" />
+            <div className="h-px w-8 bg-[#F15A24]/30" />
           </motion.div>
         </div>
 
@@ -217,7 +217,7 @@ export default function MenuPage() {
               placeholder={t('search_placeholder') || "Search for dishes..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#EFE9D9] border border-[#DED4C1] rounded-2xl py-3 pl-12 pr-4 text-[#2D241E] placeholder:text-[#2D241E]/40 focus:outline-none focus:ring-2 focus:ring-brand-accent/20 transition-all shadow-sm"
+              className="w-full bg-[#EFE9D9] border border-[#DED4C1] rounded-2xl py-3 pl-12 pr-4 text-[#2D241E] placeholder:text-[#2D241E]/40 focus:outline-none focus:ring-2 focus:ring-[#F15A24]/20 transition-all shadow-sm"
             />
           </div>
 
@@ -236,7 +236,7 @@ export default function MenuPage() {
                 {filter === mode && (
                   <motion.div 
                     layoutId="activeFilter"
-                    className="absolute inset-0 bg-brand-accent rounded-xl shadow-lg"
+                    className="absolute inset-0 bg-[#F15A24] rounded-xl shadow-lg"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -261,7 +261,7 @@ export default function MenuPage() {
               >
                 {/* Category Header */}
                 <div className="inline-block bg-brand-accent/10 border border-brand-accent/20 px-6 py-2 rounded-full mb-8">
-                  <h2 className="text-brand-accent font-black uppercase tracking-tighter text-xl md:text-2xl">
+                  <h2 className="text-[#F15A24] font-black uppercase tracking-tighter text-xl md:text-2xl">
                     <FadeText>{category.category[language]}</FadeText>
                   </h2>
                 </div>
@@ -292,7 +292,7 @@ export default function MenuPage() {
                               {item.name.en}
                             </h3>
                             <div className="mx-2 flex-grow border-b border-dotted border-brand-text/20 mb-1" />
-                            <span className="text-xl font-black text-brand-accent">
+                            <span className="text-xl font-black text-[#F15A24]">
                               {typeof item.price === 'number' ? `₹${item.price}` : item.price}
                             </span>
                           </div>

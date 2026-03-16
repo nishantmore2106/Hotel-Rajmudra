@@ -20,14 +20,14 @@ export const Header = () => {
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="fixed top-4 md:top-6 left-1/2 w-[95%] max-w-6xl z-50 px-5 md:px-8 py-3 flex items-center justify-between bg-brand-bg/80 backdrop-blur-2xl border border-brand-accent/20 rounded-full shadow-lg"
+        className="fixed top-4 md:top-6 left-1/2 w-[95%] max-w-6xl z-50 px-5 md:px-8 py-3 flex items-center justify-between bg-[#0B0B0F]/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
       >
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className={`text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors ${location.pathname === link.path ? 'text-brand-accent' : 'text-brand-text/60 hover:text-brand-accent'}`}
+              className={`text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors ${location.pathname === link.path ? 'text-[#F4A300]' : 'text-[#F5F1E8]/60 hover:text-[#F4A300]'}`}
             >
               <FadeText>{link.name}</FadeText>
             </Link>
@@ -35,16 +35,16 @@ export const Header = () => {
         </div>
 
         <div className="md:hidden">
-          <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2 text-brand-text">
+          <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2 text-[#F5F1E8]">
             <Menu className="w-6 h-6" />
           </button>
         </div>
 
         <div className="flex flex-col items-center cursor-pointer" onClick={() => window.location.href = '/'}>
-          <h1 className="text-base md:text-2xl font-black tracking-widest text-brand-text">
+          <h1 className="text-base md:text-2xl font-black tracking-widest text-[#F5F1E8]">
             <FadeText>{t('hotel_name')}</FadeText>
           </h1>
-          <span className="text-[10px] md:text-sm font-medium text-brand-accent tracking-widest">
+          <span className="text-[10px] md:text-sm font-medium text-[#F4A300] tracking-widest">
             <FadeText>{t('hotel_name_mr')}</FadeText>
           </span>
         </div>
@@ -54,14 +54,12 @@ export const Header = () => {
             href="https://instagram.com/hotelrajmudra_" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="p-2 hover:text-brand-accent text-brand-text transition-colors"
+            className="p-2 hover:text-[#F4A300] text-[#F5F1E8] transition-colors"
           ><Instagram className="w-5 h-5" /></a>
-          {location.pathname !== '/menu' && (
-            <div className="flex bg-white/5 rounded-full p-0.5 md:p-1 border border-white/10 ml-1 md:ml-2">
-              <button onClick={() => setLanguage('en')} className={`px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-full transition-all duration-300 ${language === 'en' ? 'bg-brand-accent text-white' : 'text-brand-text/60 hover:text-brand-text'}`}>EN</button>
-              <button onClick={() => setLanguage('mr')} className={`px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-full transition-all duration-300 ${language === 'mr' ? 'bg-brand-accent text-white' : 'text-brand-text/60 hover:text-brand-text'}`}>मराठी</button>
-            </div>
-          )}
+          <div className="flex bg-white/5 rounded-full p-0.5 md:p-1 border border-white/10 ml-1 md:ml-2">
+            <button onClick={() => setLanguage('en')} className={`px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-full transition-all duration-300 ${language === 'en' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>EN</button>
+            <button onClick={() => setLanguage('mr')} className={`px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-full transition-all duration-300 ${language === 'mr' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>मराठी</button>
+          </div>
         </div>
       </motion.nav>
 
@@ -74,7 +72,7 @@ export const Header = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[60] bg-brand-bg/60 backdrop-blur-sm"
+              className="fixed inset-0 z-[60] bg-[#0B0B0F]/60 backdrop-blur-sm"
               onClick={() => setIsMenuOpen(false)}
             />
             {/* Drawer */}
@@ -100,15 +98,15 @@ export const Header = () => {
                     key={link.name}
                     to={link.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`text-2xl font-black uppercase tracking-widest ${location.pathname === link.path ? 'text-brand-accent' : 'text-brand-text hover:text-brand-accent'} transition-colors`}
+                    className={`text-2xl font-black uppercase tracking-widest ${location.pathname === link.path ? 'text-[#F4A300]' : 'text-[#F5F1E8] hover:text-[#F4A300]'} transition-colors`}
                   >
                     <FadeText>{link.name}</FadeText>
                   </Link>
                 ))}
-                <div className="w-full h-px bg-brand-text/10 my-4" />
-                <div className="flex bg-brand-text/5 rounded-full p-1 border border-brand-text/10 w-full relative">
-                  <button onClick={() => { setLanguage('en'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-sm font-bold rounded-full transition-all duration-300 ${language === 'en' ? 'bg-brand-accent text-white' : 'text-brand-text/60 hover:text-brand-text'}`}>EN</button>
-                  <button onClick={() => { setLanguage('mr'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-sm font-bold rounded-full transition-all duration-300 ${language === 'mr' ? 'bg-brand-accent text-white' : 'text-brand-text/60 hover:text-brand-text'}`}>मराठी</button>
+                <div className="w-full h-px bg-white/10 my-4" />
+                <div className="flex bg-white/5 rounded-full p-1 border border-white/10 w-full relative">
+                  <button onClick={() => { setLanguage('en'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-sm font-bold rounded-full transition-all duration-300 ${language === 'en' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>EN</button>
+                  <button onClick={() => { setLanguage('mr'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-sm font-bold rounded-full transition-all duration-300 ${language === 'mr' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>मराठी</button>
                 </div>
               </div>
             </motion.div>
