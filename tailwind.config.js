@@ -8,9 +8,9 @@ export default {
     extend: {
       colors: {
         brand: {
-          bg: '#0B0B0F',
-          text: '#F5F1E8',
-          accent: '#F4A300',
+          bg: 'var(--color-brand-bg)',
+          text: 'var(--color-brand-text)',
+          accent: 'var(--color-brand-accent)',
         }
       },
       fontFamily: {

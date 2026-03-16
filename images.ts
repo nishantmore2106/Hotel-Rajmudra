@@ -1,5 +1,5 @@
 import heroBg from './assets/image.png';
-import heroLogo from './assets/image-removebg-preview (3).png';
+import heroLogo from './assets/image copy 5.png';
 import comfortImg from './assets/image copy 3.png';
 import founderSunil from './assets/image copy 4.png';
 import founderSanket from './assets/IMG_8624.PNG';

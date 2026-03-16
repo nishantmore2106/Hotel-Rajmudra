@@ -9,8 +9,6 @@ export const translations = {
     hero_subtitle: "Experience the Legacy of Flavors",
     dine_in: "Dine-in",
     takeaway: "Takeaway",
-    delivery: "Delivery",
-    reserve_table: "Reserve a Table",
     explore_hotel: "Explore Hotel",
     view_menu: "View Menu",
     explore_menu_title: "Explore Our",
@@ -115,6 +113,7 @@ export const translations = {
     msg_pune: "Ideal stop before entering the Konkan highway route.",
     msg_mahad: "Just a short drive away for delicious food.",
     msg_goa: "A perfect break while traveling toward Mumbai.",
+    address_text: "Mumbai-Goa Highway, Poladpur, Maharashtra 402303",
   },
   mr: {
     nav_home: "मुख्य पृष्ठ",
@@ -126,8 +125,6 @@ export const translations = {
     hero_subtitle: "परंपरेच्या चवीचा अनुभव घ्या",
     dine_in: "डाईन-इन",
     takeaway: "टेकअवे",
-    delivery: "डिलिव्हरी",
-    reserve_table: "टेबल आरक्षित करा",
     explore_hotel: "हॉटेल पाहा",
     view_menu: "आमचा मेनू पाहा",
     explore_menu_title: "आमचा",
@@ -232,5 +229,6 @@ export const translations = {
     msg_pune: "कोकण महामार्गावर प्रवेश करण्यापूर्वी एक आदर्श थांबा.",
     msg_mahad: "चविष्ट जेवणासाठी अगदी जवळच.",
     msg_goa: "मुंबईच्या दिशेने प्रवास करताना एक परिपूर्ण विश्रांती.",
+    address_text: "मुंबई-गोवा हायवे, पोलादपूर, महाराष्ट्र ४०२३०३",
   }
 };

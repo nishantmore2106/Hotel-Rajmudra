@@ -923,28 +923,10 @@ export default function Home() {
             <span><FadeText>{t('dine_in')}</FadeText></span>
             <span className="w-1 h-1 bg-brand-accent rounded-full" />
             <span><FadeText>{t('takeaway')}</FadeText></span>
-            <span className="w-1 h-1 bg-brand-accent rounded-full" />
-            <span><FadeText>{t('delivery')}</FadeText></span>
           </div>
 
           {/* CTA Buttons */}
           <div className="mt-8 z-20 flex flex-col sm:flex-row items-center gap-4">
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ 
-                type: 'spring', 
-                stiffness: 200, 
-                damping: 15, 
-                delay: 1.5 
-              }}
-              className="group relative px-8 py-4 md:px-10 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-widest text-xs md:text-sm rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent w-full sm:w-auto"
-            >
-              <span className="relative z-10 group-hover:text-[#0B0B0F] transition-colors duration-500"><FadeText>{t('reserve_table')}</FadeText></span>
-              <div className="absolute inset-0 bg-brand-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            </motion.button>
-
             <motion.button
               onClick={() => window.open('/explore', '_blank')}
               whileTap={{ scale: 0.95 }}
@@ -954,7 +936,7 @@ export default function Home() {
                 type: 'spring', 
                 stiffness: 200, 
                 damping: 15, 
-                delay: 1.6 
+                delay: 1.5 
               }}
               className="group relative px-8 py-4 md:px-10 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-widest text-xs md:text-sm rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent w-full sm:w-auto"
             >
@@ -971,7 +953,7 @@ export default function Home() {
                 type: 'spring', 
                 stiffness: 200, 
                 damping: 15, 
-                delay: 1.7 
+                delay: 1.6 
               }}
               className="group relative px-8 py-4 md:px-10 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-widest text-xs md:text-sm rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent w-full sm:w-auto"
             >
