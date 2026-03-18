@@ -16,7 +16,7 @@ const MENU_CATEGORIES = [
 
 const MENU_ITEMS: Record<string, { title: { en: string, mr: string }, image: string }[]> = {
   thali: [
-    { title: { en: 'Maharashtrian Thali', mr: 'महाराष्ट्रीयन थाळी' }, image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800' },
+    { title: { en: 'Maharashtrian Thali', mr: 'महाराष्ट्रीयन थाळी' }, image: IMAGES.menu.thali },
     { title: { en: 'Special Veg Thali', mr: 'स्पेशल व्हेज थाळी' }, image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=800' },
     { title: { en: 'Chicken Thali', mr: 'चिकन थाळी' }, image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
   ],
@@ -43,17 +43,17 @@ const MENU_ITEMS: Record<string, { title: { en: string, mr: string }, image: str
 };
 
 const SIGNATURE_DISHES = [
-  { id: 'misal', label: { en: 'Misal Pav', mr: 'मिसळ पाव' }, image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800' },
+  { id: 'misal', label: { en: 'Misal Pav', mr: 'मिसळ पाव' }, image: IMAGES.menu.misal },
   { id: 'kolhapuri', label: { en: 'Kolhapuri Chicken', mr: 'कोल्हापुरी चिकन' }, image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
   { id: 'kabab', label: { en: 'Dilkhush Kabab', mr: 'दिलखुश कबाब' }, image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800' },
   { id: 'tandoori', label: { en: 'Tandoori Chicken', mr: 'तंदुरी चिकन' }, image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800' },
-  { id: 'biryani', label: { en: 'Chicken Biryani', mr: 'चिकन बिर्याणी' }, image: 'https://images.unsplash.com/photo-1563379091339-03b21bc4a4f8?auto=format&fit=crop&q=80&w=800' },
+  { id: 'biryani', label: { en: 'Chicken Biryani', mr: 'चिकन बिर्याणी' }, image: IMAGES.menu.biryani },
   { id: 'paneer', label: { en: 'Paneer Tikka', mr: 'पनीर टिक्का' }, image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&q=80&w=800' },
-  { id: 'thali', label: { en: 'Maharashtrian Thali', mr: 'महाराष्ट्रीयन थाळी' }, image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800' },
+  { id: 'thali', label: { en: 'Maharashtrian Thali', mr: 'महाराष्ट्रीयन थाळी' }, image: IMAGES.menu.thali },
   { id: 'butter', label: { en: 'Butter Chicken', mr: 'बटर चिकन' }, image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
   { id: 'veg', label: { en: 'Veg Kolhapuri', mr: 'व्हेज कोल्हापुरी' }, image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=800' },
-  { id: 'dal', label: { en: 'Dal Tadka', mr: 'दाल तडका' }, image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800' },
-  { id: 'rice', label: { en: 'Jeera Rice', mr: 'जिरा राईस' }, image: 'https://images.unsplash.com/photo-1512058560366-cd2427ff56f3?auto=format&fit=crop&q=80&w=800' },
+  { id: 'dal', label: { en: 'Dal Tadka', mr: 'दाल तडका' }, image: IMAGES.menu.dal },
+  { id: 'rice', label: { en: 'Jeera Rice', mr: 'जिरा राईस' }, image: IMAGES.menu.rice },
   { id: 'soda', label: { en: 'Fresh Lime Soda', mr: 'फ्रेश लाईम सोडा' }, image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800' }
 ];
 
@@ -806,34 +806,42 @@ export default function Home() {
 
         {/* Side Food Images (Circled Images) - Hidden on mobile */}
         <motion.div
-          initial={{ x: -300, opacity: 0, rotate: -20 }}
-          animate={{ x: -80, opacity: 1, rotate: 0 }}
-          whileHover={{ x: -60, rotate: -5, scale: 1.05 }}
+          initial={{ x: -250, y: 0, opacity: 0, rotate: -20 }}
+          animate={{ x: 260, y: -20, opacity: 1, rotate: 0 }}
+          whileHover={{ x: 280, y: -30, rotate: -5, scale: 1.05 }}
           transition={{ duration: 1.2, delay: 1, type: 'spring', stiffness: 50 }}
           className="absolute left-0 top-1/2 -translate-y-1/2 hidden xl:block z-30"
         >
-          <div className="w-64 h-64 rounded-full border-8 border-brand-accent/20 overflow-hidden shadow-2xl">
+          <div 
+            className="w-[32rem] h-[32rem] bg-white p-3 shadow-2xl overflow-hidden"
+            style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)' }}
+          >
             <img 
-              src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=400" 
-              alt="Burger" 
+              src={IMAGES.hero.dish1} 
+              alt="Dish 1" 
               className="w-full h-full object-cover"
+              style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)' }}
               referrerPolicy="no-referrer"
             />
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ x: 300, opacity: 0, rotate: 20 }}
-          animate={{ x: 80, opacity: 1, rotate: 0 }}
-          whileHover={{ x: 60, rotate: 5, scale: 1.05 }}
+          initial={{ x: 250, y: 0, opacity: 0, rotate: 20 }}
+          animate={{ x: -260, y: -20, opacity: 1, rotate: 0 }}
+          whileHover={{ x: -280, y: -30, rotate: 5, scale: 1.05 }}
           transition={{ duration: 1.2, delay: 1, type: 'spring', stiffness: 50 }}
           className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block z-30"
         >
-          <div className="w-64 h-64 rounded-full border-8 border-brand-accent/20 overflow-hidden shadow-2xl">
+          <div 
+            className="w-[32rem] h-[32rem] bg-white p-3 shadow-2xl overflow-hidden"
+            style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)' }}
+          >
             <img 
-              src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=400" 
-              alt="Sandwich" 
+              src={IMAGES.hero.dish2} 
+              alt="Dish 2" 
               className="w-full h-full object-cover"
+              style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)' }}
               referrerPolicy="no-referrer"
             />
           </div>
@@ -923,28 +931,10 @@ export default function Home() {
             <span><FadeText>{t('dine_in')}</FadeText></span>
             <span className="w-1 h-1 bg-brand-accent rounded-full" />
             <span><FadeText>{t('takeaway')}</FadeText></span>
-            <span className="w-1 h-1 bg-brand-accent rounded-full" />
-            <span><FadeText>{t('delivery')}</FadeText></span>
           </div>
 
           {/* CTA Buttons */}
           <div className="mt-8 z-20 flex flex-col sm:flex-row items-center gap-4">
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ 
-                type: 'spring', 
-                stiffness: 200, 
-                damping: 15, 
-                delay: 1.5 
-              }}
-              className="group relative px-8 py-4 md:px-10 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-widest text-xs md:text-sm rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent w-full sm:w-auto"
-            >
-              <span className="relative z-10 group-hover:text-[#0B0B0F] transition-colors duration-500"><FadeText>{t('reserve_table')}</FadeText></span>
-              <div className="absolute inset-0 bg-brand-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            </motion.button>
-
             <motion.button
               onClick={() => window.open('/explore', '_blank')}
               whileTap={{ scale: 0.95 }}
@@ -1086,7 +1076,7 @@ export default function Home() {
                 >
                   <motion.img
                     src={item.image}
-                    alt={item.title}
+                    alt={item.title.en}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                     loading="lazy"

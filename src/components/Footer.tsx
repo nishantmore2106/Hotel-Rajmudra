@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Instagram, Facebook, Map } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Map, ArrowUp } from 'lucide-react';
 import { useLanguage, FadeText } from '../LanguageContext';
+import { IMAGES } from '../../images';
 
 export const Footer = () => {
   const { t } = useLanguage();
@@ -22,11 +23,20 @@ export const Footer = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <div className="mb-8">
-              <h3 className="text-brand-text text-2xl font-black tracking-widest mb-1">
-                <FadeText>{t('hotel_name')}</FadeText>
-              </h3>
-              <span className="text-brand-accent text-[10px] font-bold uppercase tracking-[0.4em]"><FadeText>{t('hotel_name_mr')}</FadeText></span>
+            <div className="mb-8 group">
+              <div className="flex items-center gap-4 mb-4">
+                <img 
+                  src={IMAGES.hero.logo} 
+                  alt="Hotel Rajmudra Logo" 
+                  className="w-12 h-12 object-contain brightness-0 invert"
+                />
+                <div>
+                  <h3 className="text-brand-text text-2xl font-black tracking-widest leading-none">
+                    <FadeText>{t('hotel_name')}</FadeText>
+                  </h3>
+                  <span className="text-brand-accent text-[10px] font-bold uppercase tracking-[0.4em]"><FadeText>{t('hotel_name_mr')}</FadeText></span>
+                </div>
+              </div>
             </div>
             <p className="text-brand-text/60 text-sm leading-relaxed mb-8 max-w-xs">
               <FadeText>{t('footer_desc')}</FadeText>
@@ -94,18 +104,20 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-4 justify-center md:justify-start">
                 <Phone className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                <span className="text-brand-text/60 text-sm font-medium">+91 XXXXX XXXXX</span>
+                <a href={`tel:${t('footer_phone').replace(/\s/g, '')}`} className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
+                  <FadeText>{t('footer_phone')}</FadeText>
+                </a>
               </li>
               <li className="flex items-center gap-4 justify-center md:justify-start">
                 <Mail className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                <a href="mailto:info@hotelrajmudra.com" className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
-                  info@hotelrajmudra.com
+                <a href={`mailto:${t('footer_email')}`} className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
+                  <FadeText>{t('footer_email')}</FadeText>
                 </a>
               </li>
               <li className="flex items-center gap-4 justify-center md:justify-start">
                 <Instagram className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                <a href="https://instagram.com/hotelrajmudra_" target="_blank" rel="noopener noreferrer" className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
-                  @hotelrajmudra_
+                <a href={`https://instagram.com/${t('instagram_handle')}`} target="_blank" rel="noopener noreferrer" className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
+                   @<FadeText>{t('instagram_handle')}</FadeText>
                 </a>
               </li>
             </ul>
@@ -148,15 +160,14 @@ export const Footer = () => {
           className="flex justify-center gap-6 mb-8 md:mb-12"
         >
           {[
-            { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/hotelrajmudra_' },
-            { icon: Facebook, label: 'Facebook', href: '#' },
+            { icon: Instagram, label: 'Instagram', href: `https://instagram.com/${t('instagram_handle')}` },
             { icon: Map, label: 'Google Maps', href: 'https://www.google.com/maps/dir/?api=1&destination=Hotel+Rajmudra+Poladpur' }
           ].map((social, i) => (
             <motion.a
               key={i}
               href={social.href}
-              target={social.href !== '#' ? "_blank" : undefined}
-              rel={social.href !== '#' ? "noopener noreferrer" : undefined}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.1, backgroundColor: "rgba(241, 90, 36, 0.1)", boxShadow: "0 0 20px rgba(241, 90, 36, 0.2)" }}
               className="w-12 h-12 rounded-full border border-brand-text/10 flex items-center justify-center text-brand-text/60 hover:text-brand-accent transition-all"
               title={social.label}
@@ -164,6 +175,14 @@ export const Footer = () => {
               <social.icon className="w-5 h-5" />
             </motion.a>
           ))}
+          <motion.button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(241, 90, 36, 0.1)", boxShadow: "0 0 20px rgba(241, 90, 36, 0.2)" }}
+            className="w-12 h-12 rounded-full border border-brand-text/10 flex items-center justify-center text-brand-text/60 hover:text-brand-accent transition-all"
+            title="Back to Top"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.button>
         </motion.div>
 
         {/* Bottom Bar */}

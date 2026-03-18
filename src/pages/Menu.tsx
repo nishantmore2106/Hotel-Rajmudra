@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Info, Leaf, Drumstick } from 'lucide-react';
+import { Search, Info, Utensils } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { useLanguage, FadeText } from '../LanguageContext';
@@ -154,6 +154,22 @@ const MENU_DATA: MenuCategory[] = [
   }
 ];
 
+function MenuHero() {
+  return (
+    <section className="relative w-full h-[50vh] md:h-[65vh] flex items-center justify-center overflow-hidden bg-[#ef5925] select-none">
+      {/* Subtle Glow - subtle match for the image vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_80%)] pointer-events-none" />
+      
+      <img 
+        src="/assets/image copy 6.png" 
+        alt="Rajmudra Hero"
+        draggable={false}
+        className="relative z-10 w-full h-full object-contain p-4 md:p-12 pointer-events-none"
+      />
+    </section>
+  );
+}
+
 export default function MenuPage() {
   const [filter, setFilter] = useState<'all' | 'veg' | 'non-veg'>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -176,67 +192,42 @@ export default function MenuPage() {
   })).filter(category => category.items.length > 0);
 
   return (
-    <div className="min-h-screen bg-[#F7F1E3] text-[#2D241E] font-sans pb-20">
+    <div className="min-h-screen bg-[#0B0B0F] text-[#F5F1E8] font-sans pb-20">
       <Header />
       
-      {/* Background Decor */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-20">
-        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-[#F15A24]/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-[#F15A24]/5 blur-[120px] rounded-full" />
-      </div>
+      <MenuHero />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-12">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 text-[#2D241E]"
-          >
-            Hotel Rajmudra
-          </motion.h1>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center justify-center gap-4 text-brand-accent font-bold tracking-widest uppercase text-sm"
-          >
-            <div className="h-px w-8 bg-[#F15A24]/30" />
-            <FadeText>Authentic Culinary Journey</FadeText>
-            <div className="h-px w-8 bg-[#F15A24]/30" />
-          </motion.div>
-        </div>
-
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-12 pb-12">
         {/* Search and Filters */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
           {/* Search */}
           <div className="relative w-full md:w-96 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-text/40 group-focus-within:text-brand-accent transition-colors" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within:text-brand-accent transition-colors" />
             <input
               type="text"
               placeholder={t('search_placeholder') || "Search for dishes..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#EFE9D9] border border-[#DED4C1] rounded-2xl py-3 pl-12 pr-4 text-[#2D241E] placeholder:text-[#2D241E]/40 focus:outline-none focus:ring-2 focus:ring-[#F15A24]/20 transition-all shadow-sm"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-brand-accent/20 transition-all shadow-sm"
             />
           </div>
 
           {/* Filter Controls */}
-          <div className="flex bg-[#EFE9D9] p-1.5 rounded-2xl border border-[#DED4C1] shadow-sm">
+          <div className="flex bg-white/5 p-1.5 rounded-2xl border border-white/10 shadow-sm">
             {(['all', 'veg', 'non-veg'] as const).map((mode) => (
               <button
                 key={mode}
                 onClick={() => setFilter(mode)}
                 className={`px-8 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-300 relative ${
                   filter === mode 
-                    ? 'text-white' 
-                    : 'text-brand-text/50 hover:text-brand-text'
+                    ? 'text-black' 
+                    : 'text-white/50 hover:text-white'
                 }`}
               >
                 {filter === mode && (
                   <motion.div 
                     layoutId="activeFilter"
-                    className="absolute inset-0 bg-[#F15A24] rounded-xl shadow-lg"
+                    className="absolute inset-0 bg-brand-accent rounded-xl shadow-lg"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -257,11 +248,11 @@ export default function MenuPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="bg-[#FBF8EF] rounded-[40px] p-8 md:p-10 border border-[#EDDFCA] shadow-[0_10px_30px_rgba(45,36,30,0.05)] h-fit"
+                className="bg-white/[0.02] backdrop-blur-3xl rounded-[40px] p-8 md:p-10 border border-white/10 shadow-2xl h-fit"
               >
                 {/* Category Header */}
                 <div className="inline-block bg-brand-accent/10 border border-brand-accent/20 px-6 py-2 rounded-full mb-8">
-                  <h2 className="text-[#F15A24] font-black uppercase tracking-tighter text-xl md:text-2xl">
+                  <h2 className="text-brand-accent font-black uppercase tracking-tighter text-xl md:text-2xl">
                     <FadeText>{category.category[language]}</FadeText>
                   </h2>
                 </div>
@@ -288,15 +279,15 @@ export default function MenuPage() {
                         
                         <div className="flex-grow">
                           <div className="flex items-baseline justify-between w-full">
-                            <h3 className="text-lg md:text-xl font-bold text-[#2D241E]">
+                            <h3 className="text-lg md:text-xl font-bold text-[#F5F1E8] group-hover:text-brand-accent transition-colors">
                               {item.name.en}
                             </h3>
-                            <div className="mx-2 flex-grow border-b border-dotted border-brand-text/20 mb-1" />
-                            <span className="text-xl font-black text-[#F15A24]">
+                            <div className="mx-2 flex-grow border-b border-dotted border-white/10 mb-1" />
+                            <span className="text-xl font-black text-brand-accent">
                               {typeof item.price === 'number' ? `₹${item.price}` : item.price}
                             </span>
                           </div>
-                          <p className="text-[#2D241E]/60 font-medium text-sm mt-0.5 italic">
+                          <p className="text-[#F5F1E8]/40 font-medium text-sm mt-0.5 italic">
                             {item.name.mr}
                           </p>
                         </div>
@@ -314,11 +305,11 @@ export default function MenuPage() {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20 px-6 bg-[#FBF8EF] rounded-[40px] border border-dotted border-brand-text/20"
+            className="text-center py-20 px-6 bg-white/5 rounded-[40px] border border-dotted border-white/10"
           >
-            <Info className="w-12 h-12 mx-auto mb-4 text-brand-text/20" />
-            <h3 className="text-2xl font-bold text-brand-text/40 mb-2">No dishes found</h3>
-            <p className="text-brand-text/30">Try adjusting your filters or search query</p>
+            <Info className="w-12 h-12 mx-auto mb-4 text-white/20" />
+            <h3 className="text-2xl font-bold text-white/40 mb-2">No dishes found</h3>
+            <p className="text-white/30">Try adjusting your filters or search query</p>
           </motion.div>
         )}
       </div>
