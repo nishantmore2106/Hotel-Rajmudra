@@ -807,13 +807,13 @@ export default function Home() {
         {/* Side Food Images (Circled Images) - Hidden on mobile */}
         <motion.div
           initial={{ x: -250, y: 0, opacity: 0, rotate: -20 }}
-          animate={{ x: 260, y: -20, opacity: 1, rotate: 0 }}
-          whileHover={{ x: 280, y: -30, rotate: -5, scale: 1.05 }}
+          animate={{ x: 100, y: 0, opacity: 1, rotate: 0 }}
+          whileHover={{ x: 120, y: -10, rotate: -5, scale: 1.05 }}
           transition={{ duration: 1.2, delay: 1, type: 'spring', stiffness: 50 }}
           className="absolute left-0 top-1/2 -translate-y-1/2 hidden xl:block z-30"
         >
           <div 
-            className="w-[32rem] h-[32rem] bg-white p-3 shadow-2xl overflow-hidden"
+            className="w-[26rem] h-[26rem] bg-white p-2 shadow-2xl overflow-hidden"
             style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)' }}
           >
             <img 
@@ -828,13 +828,13 @@ export default function Home() {
 
         <motion.div
           initial={{ x: 250, y: 0, opacity: 0, rotate: 20 }}
-          animate={{ x: -260, y: -20, opacity: 1, rotate: 0 }}
-          whileHover={{ x: -280, y: -30, rotate: 5, scale: 1.05 }}
+          animate={{ x: -100, y: 0, opacity: 1, rotate: 0 }}
+          whileHover={{ x: -120, y: -10, rotate: 5, scale: 1.05 }}
           transition={{ duration: 1.2, delay: 1, type: 'spring', stiffness: 50 }}
           className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block z-30"
         >
           <div 
-            className="w-[32rem] h-[32rem] bg-white p-3 shadow-2xl overflow-hidden"
+            className="w-[26rem] h-[26rem] bg-white p-2 shadow-2xl overflow-hidden"
             style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)' }}
           >
             <img 
