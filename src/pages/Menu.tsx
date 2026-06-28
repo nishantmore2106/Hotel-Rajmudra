@@ -156,17 +156,128 @@ const MENU_DATA: MenuCategory[] = [
 
 function MenuHero() {
   return (
-    <section className="relative w-full h-[50vh] md:h-[65vh] flex items-center justify-center overflow-hidden bg-[#ef5925] select-none">
-      {/* Subtle Glow - subtle match for the image vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_80%)] pointer-events-none" />
+    <section className="relative w-full h-[50vh] md:h-[65vh] flex items-center justify-center overflow-hidden bg-forest-mid select-none">
+      {/* Subtle Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(200,163,95,0.08),transparent_80%)] pointer-events-none" />
       
       <img 
         src="/assets/image copy 6.png" 
         alt="Rajmudra Hero"
         draggable={false}
-        className="relative z-10 w-full h-full object-contain p-4 md:p-12 pointer-events-none"
+        className="relative z-10 w-full h-full object-contain p-4 md:p-12"
       />
     </section>
+  );
+}
+
+function CategoryCard({ category, language }: { category: MenuCategory; language: 'en' | 'mr' }) {
+  return (
+    <div className="bg-forest-light/80 backdrop-blur-3xl rounded-[40px] p-8 md:p-10 border border-gold-accent/10 shadow-2xl h-fit w-full">
+      {/* Category Header */}
+      <div className="inline-block bg-gold-accent/10 border border-gold-accent/20 px-6 py-2 rounded-full mb-8">
+        <h2 className="text-gold-accent font-black uppercase tracking-tighter text-xl md:text-2xl">
+          <FadeText>{category.category[language]}</FadeText>
+        </h2>
+      </div>
+
+      {/* Dish Items */}
+      <div className="space-y-8">
+        {category.items.map((item) => (
+          <div key={item.name.en} className="group">
+            <div className="flex items-baseline gap-2 mb-1">
+              <div className="flex-shrink-0 mr-2">
+                {item.veg ? (
+                  <div className="w-5 h-5 border-2 border-green-600 p-0.5 flex items-center justify-center rounded-sm">
+                    <div className="w-2.5 h-2.5 bg-green-600 rounded-full" />
+                  </div>
+                ) : (
+                  <div className="w-5 h-5 border-2 border-red-600 p-0.5 flex items-center justify-center rounded-sm">
+                    <div className="w-2.5 h-2.5 bg-red-600 rounded-full" />
+                  </div>
+                )}
+              </div>
+              
+              <div className="flex-grow">
+                <div className="flex items-baseline justify-between w-full">
+                  <h3 className="text-lg md:text-xl font-bold text-cream group-hover:text-gold-accent transition-colors">
+                    {item.name.en}
+                  </h3>
+                  <div className="mx-2 flex-grow border-b border-dotted border-gold-accent/10 mb-1" />
+                  <span className="text-xl font-black text-gold-accent">
+                    {typeof item.price === 'number' ? `₹${item.price}` : item.price}
+                  </span>
+                </div>
+                <p className="text-cream/40 font-medium text-sm mt-0.5 italic">
+                  {item.name.mr}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileMenuBook({ data, language }: { data: MenuCategory[]; language: 'en' | 'mr' }) {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const paginate = (newDirection: number) => {
+    if (currentPage + newDirection >= 0 && currentPage + newDirection < data.length) {
+      setDirection(newDirection);
+      setCurrentPage(prev => prev + newDirection);
+    }
+  };
+
+  return (
+    <div className="relative w-full max-w-sm mx-auto aspect-[3/4] perspective-1000 mt-8 mb-12">
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={currentPage}
+          custom={direction}
+          initial={{ rotateY: direction > 0 ? 90 : -90, opacity: 0 }}
+          animate={{ rotateY: 0, opacity: 1 }}
+          exit={{ rotateY: direction > 0 ? -90 : 90, opacity: 0 }}
+          transition={{
+            rotateY: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 }
+          }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={(_, info) => {
+            if (info.offset.x < -50) paginate(1);
+            if (info.offset.x > 50) paginate(-1);
+          }}
+          style={{ transformStyle: "preserve-3d" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          {/* Page Visuals */}
+          <div className="absolute inset-0 bg-forest-mid rounded-2xl shadow-2xl overflow-hidden border border-gold-accent/10 flex flex-col p-6">
+            <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-black/20 to-transparent" />
+            <div className="flex-grow overflow-y-auto no-scrollbar">
+              <CategoryCard category={data[currentPage]} language={language} />
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation Indicators */}
+      <div className="absolute -bottom-10 left-0 right-0 flex justify-center gap-2">
+        {data.map((_, i) => (
+          <div 
+            key={i} 
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${i === currentPage ? 'bg-gold-accent w-6' : 'bg-cream/20'}`}
+          />
+        ))}
+      </div>
+
+      {/* Page Numbers */}
+      <div className="absolute -bottom-16 left-0 right-0 text-center text-cream/40 text-xs font-bold uppercase tracking-widest">
+        Page {currentPage + 1} of {data.length}
+      </div>
+    </div>
   );
 }
 
@@ -182,7 +293,7 @@ export default function MenuPage() {
   const filteredMenuData = MENU_DATA.map(category => ({
     ...category,
     items: category.items.filter(item => {
-      const matchesSearch = item.name[language].toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = (item.name[language] || "").toLowerCase().includes(searchQuery.toLowerCase());
       const matchesFilter = 
         filter === 'all' || 
         (filter === 'veg' && item.veg) || 
@@ -192,7 +303,7 @@ export default function MenuPage() {
   })).filter(category => category.items.length > 0);
 
   return (
-    <div className="min-h-screen bg-[#0B0B0F] text-[#F5F1E8] font-sans pb-20">
+    <div className="min-h-screen bg-deep-forest text-cream font-sans pb-20 overflow-x-hidden">
       <Header />
       
       <MenuHero />
@@ -202,32 +313,32 @@ export default function MenuPage() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
           {/* Search */}
           <div className="relative w-full md:w-96 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within:text-brand-accent transition-colors" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cream/40 group-focus-within:text-gold-accent transition-colors" />
             <input
               type="text"
               placeholder={t('search_placeholder') || "Search for dishes..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-brand-accent/20 transition-all shadow-sm"
+              className="w-full bg-forest-light border border-gold-accent/10 rounded-2xl py-3 pl-12 pr-4 text-cream placeholder:text-cream/40 focus:outline-none focus:ring-2 focus:ring-gold-accent/20 transition-all shadow-sm"
             />
           </div>
 
           {/* Filter Controls */}
-          <div className="flex bg-white/5 p-1.5 rounded-2xl border border-white/10 shadow-sm">
+          <div className="flex bg-forest-light p-1.5 rounded-2xl border border-gold-accent/10 shadow-sm">
             {(['all', 'veg', 'non-veg'] as const).map((mode) => (
               <button
                 key={mode}
                 onClick={() => setFilter(mode)}
                 className={`px-8 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-300 relative ${
                   filter === mode 
-                    ? 'text-black' 
-                    : 'text-white/50 hover:text-white'
+                    ? 'text-deep-forest' 
+                    : 'text-cream/50 hover:text-cream'
                 }`}
               >
                 {filter === mode && (
                   <motion.div 
                     layoutId="activeFilter"
-                    className="absolute inset-0 bg-brand-accent rounded-xl shadow-lg"
+                    className="absolute inset-0 bg-gold-accent rounded-xl shadow-lg"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -237,8 +348,8 @@ export default function MenuPage() {
           </div>
         </div>
 
-        {/* Menu Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+        {/* Desktop View (Grid) */}
+        <div className="hidden lg:grid grid-cols-2 gap-12">
           <AnimatePresence mode="popLayout">
             {filteredMenuData.map((category, idx) => (
               <motion.div
@@ -248,69 +359,33 @@ export default function MenuPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="bg-white/[0.02] backdrop-blur-3xl rounded-[40px] p-8 md:p-10 border border-white/10 shadow-2xl h-fit"
               >
-                {/* Category Header */}
-                <div className="inline-block bg-brand-accent/10 border border-brand-accent/20 px-6 py-2 rounded-full mb-8">
-                  <h2 className="text-brand-accent font-black uppercase tracking-tighter text-xl md:text-2xl">
-                    <FadeText>{category.category[language]}</FadeText>
-                  </h2>
-                </div>
-
-                {/* Dish Items */}
-                <div className="space-y-8">
-                  {category.items.map((item, itemIdx) => (
-                    <motion.div 
-                      key={item.name.en}
-                      className="group"
-                    >
-                      <div className="flex items-baseline gap-2 mb-1">
-                        <div className="flex-shrink-0 mr-2">
-                          {item.veg ? (
-                            <div className="w-5 h-5 border-2 border-green-600 p-0.5 flex items-center justify-center rounded-sm">
-                              <div className="w-2.5 h-2.5 bg-green-600 rounded-full" />
-                            </div>
-                          ) : (
-                            <div className="w-5 h-5 border-2 border-red-600 p-0.5 flex items-center justify-center rounded-sm">
-                              <div className="w-2.5 h-2.5 bg-red-600 rounded-full" />
-                            </div>
-                          )}
-                        </div>
-                        
-                        <div className="flex-grow">
-                          <div className="flex items-baseline justify-between w-full">
-                            <h3 className="text-lg md:text-xl font-bold text-[#F5F1E8] group-hover:text-brand-accent transition-colors">
-                              {item.name.en}
-                            </h3>
-                            <div className="mx-2 flex-grow border-b border-dotted border-white/10 mb-1" />
-                            <span className="text-xl font-black text-brand-accent">
-                              {typeof item.price === 'number' ? `₹${item.price}` : item.price}
-                            </span>
-                          </div>
-                          <p className="text-[#F5F1E8]/40 font-medium text-sm mt-0.5 italic">
-                            {item.name.mr}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                <CategoryCard category={category} language={language} />
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
 
-        {/* Empty State */}
+        {/* Mobile View (3D Book) */}
+        <div className="block lg:hidden">
+          {filteredMenuData.length > 0 ? (
+            <MobileMenuBook data={filteredMenuData} language={language} />
+          ) : (
+            <div className="text-center py-20 px-6 bg-forest-light rounded-[40px] border border-dotted border-gold-accent/10">
+              <Info className="w-12 h-12 mx-auto mb-4 text-cream/20" />
+              <h3 className="text-2xl font-bold text-cream/40 mb-2">No dishes found</h3>
+              <p className="text-cream/30">Try adjusting your filters or search query</p>
+            </div>
+          )}
+        </div>
+
+        {/* Empty State (Desktop only, Mobile handled inside MobileMenuBook or wrapper) */}
         {filteredMenuData.length === 0 && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-20 px-6 bg-white/5 rounded-[40px] border border-dotted border-white/10"
-          >
-            <Info className="w-12 h-12 mx-auto mb-4 text-white/20" />
-            <h3 className="text-2xl font-bold text-white/40 mb-2">No dishes found</h3>
-            <p className="text-white/30">Try adjusting your filters or search query</p>
-          </motion.div>
+          <div className="hidden lg:block text-center py-20 px-6 bg-forest-light rounded-[40px] border border-dotted border-gold-accent/10">
+            <Info className="w-12 h-12 mx-auto mb-4 text-cream/20" />
+            <h3 className="text-2xl font-bold text-cream/40 mb-2">No dishes found</h3>
+            <p className="text-cream/30">Try adjusting your filters or search query</p>
+          </div>
         )}
       </div>
 

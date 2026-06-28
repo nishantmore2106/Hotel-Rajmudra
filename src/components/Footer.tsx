@@ -8,13 +8,12 @@ export const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="relative pt-20 md:pt-32 pb-10 md:pb-16 bg-brand-bg overflow-hidden border-t border-brand-accent/10">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent" />
-      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-accent/5 blur-[120px] rounded-full pointer-events-none" />
+    <footer className="relative pt-24 md:pt-32 pb-12 md:pb-16 bg-deep-forest overflow-hidden border-t border-gold-accent/10">
+      {/* Top gold line */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gold-accent/30 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 text-brand-text">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 mb-12 md:mb-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 mb-16 md:mb-24">
           {/* Column 1: Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -23,33 +22,33 @@ export const Footer = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <div className="mb-8 group">
+            <div className="mb-8">
               <div className="flex items-center gap-4 mb-4">
                 <img 
                   src={IMAGES.hero.logo} 
                   alt="Hotel Rajmudra Logo" 
-                  className="w-12 h-12 object-contain brightness-0 invert"
+                  className="w-12 h-12 object-contain opacity-80"
                 />
                 <div>
-                  <h3 className="text-brand-text text-2xl font-black tracking-widest leading-none">
+                  <h3 className="font-display text-cream text-2xl italic leading-none">
                     <FadeText>{t('hotel_name')}</FadeText>
                   </h3>
-                  <span className="text-brand-accent text-[10px] font-bold uppercase tracking-[0.4em]"><FadeText>{t('hotel_name_mr')}</FadeText></span>
+                  <span className="text-gold-accent text-[10px] font-sans font-medium uppercase tracking-[0.3em]"><FadeText>{t('hotel_name_mr')}</FadeText></span>
                 </div>
               </div>
             </div>
-            <p className="text-brand-text/60 text-sm leading-relaxed mb-8 max-w-xs">
+            <p className="text-cream/50 text-sm font-sans font-light leading-relaxed mb-8 max-w-xs">
               <FadeText>{t('footer_desc')}</FadeText>
             </p>
-            <div className="flex items-center gap-3 bg-brand-text/5 px-4 py-2 rounded-full border border-brand-text/10">
+            <div className="flex items-center gap-3 bg-gold-accent/5 px-4 py-2 rounded-full border border-gold-accent/10">
               <div className="flex -space-x-2">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-6 h-6 rounded-full border-2 border-brand-bg bg-brand-accent/20 flex items-center justify-center">
-                    <span className="text-[8px] font-bold text-brand-accent">★</span>
+                  <div key={i} className="w-6 h-6 rounded-full border-2 border-deep-forest bg-gold-accent/15 flex items-center justify-center">
+                    <span className="text-[8px] font-bold text-gold-accent">★</span>
                   </div>
                 ))}
               </div>
-              <span className="text-brand-text text-xs font-bold uppercase tracking-widest"><FadeText>4.2 {t('rating_text')}</FadeText></span>
+              <span className="text-cream text-xs font-sans font-medium uppercase tracking-widest"><FadeText>4.2 {t('rating_text')}</FadeText></span>
             </div>
           </motion.div>
 
@@ -61,8 +60,9 @@ export const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <h4 className="text-brand-text font-bold uppercase tracking-widest mb-8 text-sm border-b border-brand-accent pb-2">
+            <h4 className="text-cream font-sans font-medium uppercase tracking-[0.2em] mb-8 text-sm">
               <FadeText>{t('quick_links')}</FadeText>
+              <div className="w-8 h-[1px] bg-gold-accent/40 mt-3 mx-auto md:mx-0" />
             </h4>
             <ul className="flex flex-col gap-4">
               {[
@@ -75,10 +75,10 @@ export const Footer = () => {
                 <li key={link}>
                   <a 
                     href="#" 
-                    className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium relative group"
+                    className="text-cream/50 hover:text-gold-accent transition-colors text-sm font-sans font-light relative group"
                   >
                     <FadeText>{link}</FadeText>
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold-accent transition-all duration-300 group-hover:w-full" />
                   </a>
                 </li>
               ))}
@@ -93,40 +93,42 @@ export const Footer = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <h4 className="text-brand-text font-bold uppercase tracking-widest mb-8 text-sm border-b border-brand-accent pb-2"><FadeText>{t('contact')}</FadeText></h4>
+            <h4 className="text-cream font-sans font-medium uppercase tracking-[0.2em] mb-8 text-sm">
+              <FadeText>{t('contact')}</FadeText>
+              <div className="w-8 h-[1px] bg-gold-accent/40 mt-3 mx-auto md:mx-0" />
+            </h4>
             <ul className="flex flex-col gap-6">
               <li className="flex items-start gap-4 justify-center md:justify-start">
-                <MapPin className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                <span className="text-brand-text/60 text-sm leading-relaxed text-left">
+                <MapPin className="w-4 h-4 text-gold-accent flex-shrink-0 mt-1" />
+                <span className="text-cream/50 text-sm font-sans font-light leading-relaxed text-left">
                   <FadeText>{t('address_text').split(',')[0].trim()}</FadeText>,<br />
                   <FadeText>{t('address_text').split(',').slice(1).join(',').trim()}</FadeText>
                 </span>
               </li>
               <li className="flex items-center gap-4 justify-center md:justify-start">
-                <Phone className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                <a href={`tel:${t('footer_phone').replace(/\s/g, '')}`} className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
+                <Phone className="w-4 h-4 text-gold-accent flex-shrink-0" />
+                <a href={`tel:${t('footer_phone').replace(/\s/g, '')}`} className="text-cream/50 hover:text-gold-accent transition-colors text-sm font-sans font-light">
                   <FadeText>{t('footer_phone')}</FadeText>
                 </a>
               </li>
               <li className="flex items-center gap-4 justify-center md:justify-start">
-                <Mail className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                <a href={`mailto:${t('footer_email')}`} className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
+                <Mail className="w-4 h-4 text-gold-accent flex-shrink-0" />
+                <a href={`mailto:${t('footer_email')}`} className="text-cream/50 hover:text-gold-accent transition-colors text-sm font-sans font-light">
                   <FadeText>{t('footer_email')}</FadeText>
                 </a>
               </li>
               <li className="flex items-center gap-4 justify-center md:justify-start">
-                <Instagram className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                <a href={`https://instagram.com/${t('instagram_handle')}`} target="_blank" rel="noopener noreferrer" className="text-brand-text/60 hover:text-brand-accent transition-colors text-sm font-medium">
+                <Instagram className="w-4 h-4 text-gold-accent flex-shrink-0" />
+                <a href={`https://instagram.com/${t('instagram_handle')}`} target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-gold-accent transition-colors text-sm font-sans font-light">
                    @<FadeText>{t('instagram_handle')}</FadeText>
                 </a>
               </li>
             </ul>
             <button 
               onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=Hotel+Rajmudra+Poladpur', '_blank')}
-              className="mt-8 group relative px-8 py-3 bg-transparent border border-brand-accent/30 text-brand-accent font-black uppercase tracking-widest text-xs rounded-full overflow-hidden transition-all duration-500 hover:border-brand-accent"
+              className="mt-8 px-8 py-3 border border-gold-accent/40 text-gold-accent font-sans text-[11px] font-medium uppercase tracking-[0.2em] rounded-full hover:bg-gold-accent hover:text-deep-forest transition-all duration-500"
             >
-              <span className="relative z-10 flex items-center gap-2 group-hover:text-white transition-colors duration-500"><FadeText>{t('get_directions')}</FadeText> <span className="text-lg">→</span></span>
-              <div className="absolute inset-0 bg-brand-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+              <FadeText>{t('get_directions')}</FadeText> →
             </button>
           </motion.div>
 
@@ -138,15 +140,23 @@ export const Footer = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <h4 className="text-brand-text font-bold uppercase tracking-widest mb-8 text-sm border-b border-brand-accent pb-2"><FadeText>{t('opening_hours')}</FadeText></h4>
+            <h4 className="text-cream font-sans font-medium uppercase tracking-[0.2em] mb-8 text-sm">
+              <FadeText>{t('opening_hours')}</FadeText>
+              <div className="w-8 h-[1px] bg-gold-accent/40 mt-3 mx-auto md:mx-0" />
+            </h4>
             <div className="mb-6">
-              <p className="text-brand-text font-bold text-sm mb-1 uppercase tracking-wider"><FadeText>{t('days')}</FadeText></p>
-              <p className="text-brand-accent text-2xl font-black"><FadeText>{t('hours')}</FadeText></p>
+              <p className="text-cream font-sans font-medium text-sm mb-1 uppercase tracking-wider"><FadeText>{t('days')}</FadeText></p>
+              <p className="text-gold-accent text-2xl font-display italic"><FadeText>{t('open_daily')}</FadeText></p>
             </div>
-            <div className="bg-brand-accent/10 border border-brand-accent/20 p-4 rounded-xl">
-              <p className="text-brand-accent text-xs font-bold uppercase tracking-widest leading-relaxed">
-                <FadeText>{t('open_daily')}</FadeText>
-              </p>
+            <div className="bg-gold-accent/5 border border-gold-accent/15 p-5 rounded-xl space-y-3">
+              {(['hours_breakfast', 'hours_lunch', 'hours_snacks', 'hours_dinner'] as const).map((key, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${i === 0 ? 'bg-amber-400' : i === 1 ? 'bg-orange-400' : i === 2 ? 'bg-amber-400' : 'bg-gold-accent'}`} />
+                  <p className="text-cream/70 text-xs font-sans font-medium tracking-wide">
+                    <FadeText>{t(key)}</FadeText>
+                  </p>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -157,7 +167,7 @@ export const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="flex justify-center gap-6 mb-8 md:mb-12"
+          className="flex justify-center gap-6 mb-10"
         >
           {[
             { icon: Instagram, label: 'Instagram', href: `https://instagram.com/${t('instagram_handle')}` },
@@ -168,20 +178,20 @@ export const Footer = () => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, backgroundColor: "rgba(241, 90, 36, 0.1)", boxShadow: "0 0 20px rgba(241, 90, 36, 0.2)" }}
-              className="w-12 h-12 rounded-full border border-brand-text/10 flex items-center justify-center text-brand-text/60 hover:text-brand-accent transition-all"
+              whileHover={{ scale: 1.1 }}
+              className="w-12 h-12 rounded-full border border-gold-accent/15 flex items-center justify-center text-cream/40 hover:text-gold-accent hover:border-gold-accent/40 transition-all duration-300"
               title={social.label}
             >
-              <social.icon className="w-5 h-5" />
+              <social.icon className="w-4 h-4" />
             </motion.a>
           ))}
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            whileHover={{ scale: 1.1, backgroundColor: "rgba(241, 90, 36, 0.1)", boxShadow: "0 0 20px rgba(241, 90, 36, 0.2)" }}
-            className="w-12 h-12 rounded-full border border-brand-text/10 flex items-center justify-center text-brand-text/60 hover:text-brand-accent transition-all"
+            whileHover={{ scale: 1.1 }}
+            className="w-12 h-12 rounded-full border border-gold-accent/15 flex items-center justify-center text-cream/40 hover:text-gold-accent hover:border-gold-accent/40 transition-all duration-300"
             title="Back to Top"
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp className="w-4 h-4" />
           </motion.button>
         </motion.div>
 
@@ -191,12 +201,12 @@ export const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="pt-8 md:pt-10 border-t border-brand-text/5 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left"
+          className="pt-8 border-t border-gold-accent/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left"
         >
-          <p className="text-brand-text/30 text-[10px] uppercase tracking-[0.2em] font-bold">
+          <p className="text-cream/25 text-[10px] font-sans uppercase tracking-[0.2em]">
             <FadeText>{t('rights_reserved')}</FadeText>
           </p>
-          <p className="text-brand-text/30 text-[10px] uppercase tracking-[0.2em] font-bold italic">
+          <p className="text-cream/25 text-[10px] font-sans uppercase tracking-[0.2em] italic">
             <FadeText>{t('designed_for')}</FadeText>
           </p>
         </motion.div>

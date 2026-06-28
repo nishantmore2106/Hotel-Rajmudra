@@ -1,19 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@400;600;800&family=Mukta:wght@400;700;800&family=Hind:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Outfit:wght@300;400;500;600;700;800&family=Mukta:wght@400;700;800&family=Hind:wght@400;700&display=swap');
+
+@font-face {
+  font-family: 'Malik';
+  src: url('../assets/FontsFree-Net-Malik-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Poppins", sans-serif;
-  --color-brand-bg: #0B0B0F;
-  --color-brand-accent: #F4A300;
-  --color-brand-text: #F5F1E8;
+  --font-display: "Malik", "Jost", "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Malik", "Cormorant Garamond", "Playfair Display", serif;
+  
+  /* Botanical Forest Palette */
+  --color-deep-forest: #070D0E;
+  --color-forest-mid: #091112;
+  --color-forest-light: #0D1718;
+  --color-gold-accent: #C8A35F;
+  --color-gold-muted: #B8933F;
+  --color-cream: #F5E6D0;
+  --color-cream-soft: #E8D5BC;
+
+  /* Legacy aliases */
+  --color-deep-space: var(--color-deep-forest);
+  --color-midnight: var(--color-forest-mid);
+  --color-gold-light: var(--color-gold-accent);
+  --color-gold-dark: var(--color-gold-muted);
+  --color-glass-border: rgba(200, 163, 95, 0.15);
+  --color-glass-bg: rgba(245, 230, 208, 0.03);
+
+  --color-brand-bg: var(--color-deep-forest);
+  --color-brand-text: var(--color-cream);
+  --color-brand-accent: var(--color-gold-accent);
 }
 
 body {
   background-color: var(--color-brand-bg);
   color: var(--color-brand-text);
+  font-family: var(--font-sans);
   overflow-x: hidden;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

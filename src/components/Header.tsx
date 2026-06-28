@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Instagram } from 'lucide-react';
+import { Menu, X, Instagram, Facebook } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage, FadeText } from '../LanguageContext';
+import { IMAGES } from '../../images';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,97 +17,88 @@ export const Header = () => {
 
   return (
     <>
-      <motion.nav 
-        initial={{ y: -100, x: "-50%", opacity: 0 }}
-        animate={{ y: 0, x: "-50%", opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="fixed top-4 md:top-6 left-1/2 w-[95%] max-w-6xl z-50 px-5 md:px-8 py-3 flex items-center justify-between bg-[#0B0B0F]/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
-      >
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={`text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors ${location.pathname === link.path ? 'text-[#F4A300]' : 'text-[#F5F1E8]/60 hover:text-[#F4A300]'}`}
-            >
-              <FadeText>{link.name}</FadeText>
-            </Link>
-          ))}
-        </div>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+        <div className="px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
+          {/* Logo — Script Style like Wilma */}
+          <Link to="/" className="flex items-center gap-3 cursor-pointer group shrink-0">
+            <img src={IMAGES.hero.logo} alt="Hotel Rajmudra Logo" className="w-9 h-9 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
+            <span className="font-display text-[28px] md:text-[32px] text-cream font-light italic tracking-wide leading-none">
+              Rajmudra
+            </span>
+          </Link>
 
-        <div className="md:hidden">
-          <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2 text-[#F5F1E8]">
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
+          {/* Center Nav Links — Matching Wilma's horizontal nav */}
+          <div className="hidden md:flex items-center gap-8 lg:gap-10 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`text-[13px] font-sans font-medium uppercase tracking-[0.12em] transition-all duration-300 relative group ${location.pathname === link.path ? 'text-gold-accent' : 'text-cream/70 hover:text-cream'}`}
+              >
+                <FadeText>{link.name}</FadeText>
+                <span className={`absolute -bottom-1 left-0 h-[1px] bg-gold-accent transition-all duration-300 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+              </Link>
+            ))}
+          </div>
 
-        <div className="flex flex-col items-center cursor-pointer" onClick={() => window.location.href = '/'}>
-          <h1 className="text-base md:text-2xl font-black tracking-widest text-[#F5F1E8]">
-            <FadeText>{t('hotel_name')}</FadeText>
-          </h1>
-          <span className="text-[10px] md:text-sm font-medium text-[#F4A300] tracking-widest">
-            <FadeText>{t('hotel_name_mr')}</FadeText>
-          </span>
-        </div>
+          {/* Right Side — Social Icons + Lang Toggle */}
+          <div className="hidden md:flex items-center gap-5 shrink-0">
+            <a href="https://instagram.com/hotelrajmudra_" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-cream transition-colors">
+              <Instagram className="w-[15px] h-[15px]" />
+            </a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Hotel+Rajmudra+Poladpur" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-cream transition-colors">
+              <svg className="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </a>
+            <div className="w-[1px] h-4 bg-cream/15 mx-1" />
+            <div className="flex gap-0.5">
+              <button onClick={() => setLanguage('en')} className={`px-3 py-1 text-[11px] font-sans font-medium uppercase tracking-[0.08em] transition-all duration-300 ${language === 'en' ? 'text-gold-accent' : 'text-cream/40 hover:text-cream/70'}`}>EN</button>
+              <span className="text-cream/20 text-[11px] self-center">|</span>
+              <button onClick={() => setLanguage('mr')} className={`px-3 py-1 text-[11px] font-sans font-medium uppercase tracking-[0.08em] transition-all duration-300 ${language === 'mr' ? 'text-gold-accent' : 'text-cream/40 hover:text-cream/70'}`}>मराठी</button>
+            </div>
+          </div>
 
-        <div className="flex items-center gap-4">
-          <a 
-            href="https://instagram.com/hotelrajmudra_" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="p-2 hover:text-[#F4A300] text-[#F5F1E8] transition-colors"
-          ><Instagram className="w-5 h-5" /></a>
-          <div className="flex bg-white/5 rounded-full p-0.5 md:p-1 border border-white/10 ml-1 md:ml-2">
-            <button onClick={() => setLanguage('en')} className={`px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-full transition-all duration-300 ${language === 'en' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>EN</button>
-            <button onClick={() => setLanguage('mr')} className={`px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-full transition-all duration-300 ${language === 'mr' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>मराठी</button>
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button onClick={() => setIsMenuOpen(true)} className="p-2 text-cream hover:text-gold-accent transition-colors">
+              <Menu className="w-6 h-6" />
+            </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[60] bg-[#0B0B0F]/60 backdrop-blur-sm"
+              className="fixed inset-0 z-[60] bg-deep-forest/90 backdrop-blur-sm"
               onClick={() => setIsMenuOpen(false)}
             />
-            {/* Drawer */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-[#0B0B0F] border-l border-white/10 z-[70] p-8 flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-deep-forest border-l border-gold-accent/10 z-[70] p-8 flex flex-col"
             >
               <div className="flex justify-end mb-12">
-                <button 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="p-3 bg-white/5 rounded-full text-[#F5F1E8] hover:text-[#F4A300] transition-colors"
-                >
+                <button onClick={() => setIsMenuOpen(false)} className="p-3 text-cream/60 hover:text-gold-accent transition-colors">
                   <X className="w-6 h-6" />
                 </button>
               </div>
-
               <div className="flex flex-col items-start gap-8 flex-grow">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    to={link.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`text-2xl font-black uppercase tracking-widest ${location.pathname === link.path ? 'text-[#F4A300]' : 'text-[#F5F1E8] hover:text-[#F4A300]'} transition-colors`}
-                  >
+                  <Link key={link.name} to={link.path} onClick={() => setIsMenuOpen(false)} className={`font-display text-3xl italic tracking-wide ${location.pathname === link.path ? 'text-gold-accent' : 'text-cream/70 hover:text-cream'} transition-colors`}>
                     <FadeText>{link.name}</FadeText>
                   </Link>
                 ))}
-                <div className="w-full h-px bg-white/10 my-4" />
-                <div className="flex bg-white/5 rounded-full p-1 border border-white/10 w-full relative">
-                  <button onClick={() => { setLanguage('en'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-sm font-bold rounded-full transition-all duration-300 ${language === 'en' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>EN</button>
-                  <button onClick={() => { setLanguage('mr'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-sm font-bold rounded-full transition-all duration-300 ${language === 'mr' ? 'bg-[#F4A300] text-[#0B0B0F]' : 'text-[#F5F1E8]/60 hover:text-[#F5F1E8]'}`}>मराठी</button>
+                <div className="w-16 h-[1px] bg-gold-accent/20 my-4" />
+                <div className="flex gap-4 w-full">
+                  <button onClick={() => { setLanguage('en'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-[13px] font-sans font-medium uppercase tracking-[0.1em] border border-gold-accent/20 transition-all duration-300 ${language === 'en' ? 'bg-gold-accent text-deep-forest border-gold-accent' : 'text-cream/60 hover:text-cream'}`}>EN</button>
+                  <button onClick={() => { setLanguage('mr'); setIsMenuOpen(false); }} className={`flex-1 py-3 text-[13px] font-sans font-medium uppercase tracking-[0.1em] border border-gold-accent/20 transition-all duration-300 ${language === 'mr' ? 'bg-gold-accent text-deep-forest border-gold-accent' : 'text-cream/60 hover:text-cream'}`}>मराठी</button>
                 </div>
               </div>
             </motion.div>
