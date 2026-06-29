@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, animate, useMotionValue } from 'framer-motion';
-import { Utensils, Star, MapPin, Clock, Phone, Mail, Map, Car, Navigation, BatteryCharging, Zap, Coffee, Soup, ChefHat, Leaf, Flame, Sparkles, Award, UtensilsCrossed, Heart, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { Utensils, Star, MapPin, Clock, Phone, Mail, Map, Car, Navigation, BatteryCharging, Zap, Coffee, Soup, ChefHat, Leaf, Flame, Sparkles, Award, UtensilsCrossed, Heart, ChevronLeft, ChevronRight, ArrowRight, X } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { IMAGES } from '../../images';
 import { Header } from '../components/Header';
@@ -17,7 +17,7 @@ const SIGNATURE_DISHES = [
   { id: 'thali', label: { en: 'Maharashtrian Thali', mr: 'महाराष्ट्रीयन थाळी' }, subtitle: { en: 'MAHARASHTRIAN', mr: 'महाराष्ट्रीयन' }, description: { en: 'A wholesome platter that captures the true essence of Maharashtra. A perfect balance of flavours, textures and tradition.', mr: 'महाराष्ट्राचे खरे सार टिपणारे एक परिपूर्ण ताट. चव, पोत आणि परंपरा यांचा सुरेख संगम.' }, icon: UtensilsCrossed, image: IMAGES.menu.thali },
   { id: 'dal', label: { en: 'Dal Tadka', mr: 'दाल तडका' }, subtitle: { en: 'COMFORT FOOD', mr: 'आरामदायक जेवण' }, description: { en: 'Yellow lentils tempered with ghee, cumin, garlic, and red chilies for a smoky, earthy flavour.', mr: 'तूप, जिरे, लसूण आणि लाल मिरचीचा तडका दिलेले पिवळे वरण.' }, icon: Soup, image: IMAGES.menu.dal },
   { id: 'rice', label: { en: 'Jeera Rice', mr: 'जिरा राईस' }, subtitle: { en: 'FRAGRANT SIDES', mr: 'सुगंधी भात' }, description: { en: 'Fluffy basmati rice subtly flavoured with roasted cumin seeds and fresh coriander leaves.', mr: 'भाजलेले जिरे आणि कोथिंबीर घालून बनवलेला मऊ बासमती भात.' }, icon: Soup, image: IMAGES.menu.rice },
-  { id: 'paneer', label: { en: 'Paneer Tikka', mr: 'पनीर टिक्का' }, subtitle: { en: 'TANDOORI STARTER', mr: 'तंदुरी स्टार्टर' }, description: { en: 'Soft paneer cubes marinated in a spiced yogurt mixture and grilled to perfection in a tandoor.', mr: 'मसालेदार दह्यात मुरवलेले आणि तंदूरमध्ये भाजलेले मऊ पनीरचे तुकडे.' }, icon: ChefHat, image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&q=80&w=800' },
+  { id: 'paneer', label: { en: 'Paneer Kabab', mr: 'पनीर कबाब' }, subtitle: { en: 'TANDOORI STARTER', mr: 'तंदुरी स्टार्टर' }, description: { en: 'Soft paneer cubes marinated in a spiced yogurt mixture and grilled to perfection in a tandoor.', mr: 'मसालेदार दह्यात मुरवलेले आणि तंदूरमध्ये भाजलेले मऊ पनीरचे तुकडे.' }, icon: ChefHat, image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&q=80&w=800' },
   { id: 'butter', label: { en: 'Butter Chicken', mr: 'बटर चिकन' }, subtitle: { en: 'RICH CURRY', mr: 'समृद्ध रस्सा' }, description: { en: 'Tender chicken pieces simmered in a rich, creamy, and mildly spiced tomato gravy.', mr: 'मलईदार आणि किंचित मसालेदार टोमॅटोच्या ग्रेव्हीमध्ये शिजवलेले मऊ चिकनचे तुकडे.' }, icon: ChefHat, image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
   { id: 'kolhapuri', label: { en: 'Kolhapuri Chicken', mr: 'कोल्हापुरी चिकन' }, subtitle: { en: 'FIERY REGIONAL', mr: 'झणझणीत प्रादेशिक' }, description: { en: 'A notoriously spicy and deeply flavourful chicken curry made with traditional Kolhapuri masala.', mr: 'पारंपारिक कोल्हापुरी मसाला वापरून बनवलेली अत्यंत झणझणीत आणि चविष्ट चिकन करी.' }, icon: Flame, image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=800' },
 ];
@@ -290,6 +290,7 @@ const DistanceCalculatorSection = () => {
 const EVPumpSection = () => {
   const { language, t } = useLanguage();
   const [activeImage, setActiveImage] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => setActiveImage(i => (i + 1) % IMAGES.evPump.length), 4000);
@@ -336,8 +337,8 @@ const EVPumpSection = () => {
 
           {/* Right Image Content - 3D Curved Carousel */}
           <div 
-            className="w-full lg:w-1/2 relative h-[400px] lg:h-[600px] flex items-center justify-center overflow-visible mt-8 lg:mt-0"
-            style={{ perspective: 1200 }}
+            className="w-full lg:w-1/2 relative h-[600px] lg:h-[800px] flex items-center justify-center overflow-visible mt-12 lg:mt-0"
+            style={{ perspective: 1400 }}
           >
             {IMAGES.evPump.map((img, index) => {
               // Calculate relative position (shortest path)
@@ -364,23 +365,23 @@ const EVPumpSection = () => {
                 opacity = 1;
                 zIndex = 10;
               } else if (isNext) {
-                x = window.innerWidth < 768 ? 90 : 180; // Move right
-                z = -150;
-                rotateY = -35;
-                opacity = 0.6;
+                x = window.innerWidth < 768 ? 100 : 220; // Move right
+                z = -200;
+                rotateY = -40;
+                opacity = 0.5;
                 zIndex = 5;
               } else if (isPrev) {
-                x = window.innerWidth < 768 ? -90 : -180; // Move left
-                z = -150;
-                rotateY = 35;
-                opacity = 0.6;
+                x = window.innerWidth < 768 ? -100 : -220; // Move left
+                z = -200;
+                rotateY = 40;
+                opacity = 0.5;
                 zIndex = 5;
               }
 
               return (
                 <motion.div
                   key={index}
-                  className="absolute w-[280px] md:w-[380px] lg:w-[460px] xl:w-[500px] aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/10 cursor-pointer"
+                  className="absolute w-[300px] md:w-[400px] lg:w-[500px] xl:w-[550px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.7)] border border-white/10 cursor-pointer"
                   initial={false}
                   animate={{
                     x,
@@ -390,13 +391,18 @@ const EVPumpSection = () => {
                     zIndex,
                     pointerEvents: isHidden ? 'none' : 'auto'
                   }}
-                  transition={{ duration: 0.8, type: "spring", stiffness: 90, damping: 20 }}
-                  onClick={() => !isHidden && setActiveImage(index)}
+                  transition={{ duration: 1.2, type: "spring", stiffness: 70, damping: 25, mass: 1.2 }}
+                  onClick={() => {
+                    if (!isHidden) {
+                      if (isActive) setSelectedImage(img);
+                      else setActiveImage(index);
+                    }
+                  }}
                 >
                   <img
                     src={img}
                     alt={`EV Charging ${index}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-black/20"
                     referrerPolicy="no-referrer"
                   />
                   {!isActive && <div className="absolute inset-0 bg-black/40 transition-colors duration-500 hover:bg-black/20" />}
@@ -417,6 +423,40 @@ const EVPumpSection = () => {
           </div>
         </div>
       </div>
+
+      {/* FULLSCREEN IMAGE MODAL */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 cursor-zoom-out"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button 
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 bg-black/20 rounded-full hover:bg-black/40 backdrop-blur-md"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3, type: "spring", bounce: 0.2 }}
+              src={selectedImage}
+              alt="Fullscreen View"
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()} // Prevent click on image from closing modal
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
@@ -491,12 +531,6 @@ const DishShowcase = ({ activeDish, language, onNext, onPrev }: any) => {
                 <Flame className="w-6 h-6 text-gold-accent/80 stroke-[1.5]" />
                 <span className="text-[9px] text-cream/50 uppercase tracking-widest text-center">Authentic<br/>Flavours</span>
               </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-              <button onClick={() => window.open('/menu', '_blank')} className="inline-flex items-center gap-3 px-8 py-3 bg-gold-accent text-deep-forest font-sans text-[11px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-cream transition-all duration-300">
-                <FadeText>Explore Dish</FadeText> <ArrowRight className="w-4 h-4" />
-              </button>
             </motion.div>
           </div>
 
@@ -608,7 +642,7 @@ export default function Home() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.6 }}>
-              <button onClick={() => window.open('/menu', '_blank')} className="px-10 py-3 border border-gold-accent/50 text-gold-accent font-sans text-[12px] font-medium uppercase tracking-[0.25em] rounded-none hover:bg-gold-accent hover:text-deep-forest transition-all duration-500">
+              <button onClick={() => window.location.href = '/menu'} className="px-10 py-3 border border-gold-accent/50 text-gold-accent font-sans text-[12px] font-medium uppercase tracking-[0.25em] rounded-none hover:bg-gold-accent hover:text-deep-forest transition-all duration-500">
                 <FadeText>{t('view_menu')}</FadeText>
               </button>
             </motion.div>
@@ -685,7 +719,7 @@ export default function Home() {
               Our Chef<br />Recommends
             </h2>
             <p className="text-cream/60 text-base font-sans font-light leading-[1.8] mb-10 max-w-md">
-              <FadeText>Experience our signature Dilkhush Kabab, a mouthwatering delicacy made with perfectly spiced, tender pieces of meat roasted to perfection. A truly unforgettable culinary journey and our chef's top recommendation.</FadeText>
+              <FadeText>Experience our signature Chicken Dilkhush Kabab, a mouthwatering delicacy made with perfectly spiced, tender pieces of meat roasted to perfection. A truly unforgettable culinary journey and our chef's top recommendation.</FadeText>
             </p>
             <div className="w-16 h-[1px] bg-gold-accent/40 mb-8" />
             <button onClick={() => window.open('/menu', '_blank')} className="px-10 py-3 border border-gold-accent/50 text-gold-accent font-sans text-[12px] font-medium uppercase tracking-[0.25em] rounded-none hover:bg-gold-accent hover:text-deep-forest transition-all duration-500">
@@ -695,7 +729,7 @@ export default function Home() {
 
           {/* Right: Feature Dish Image */}
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.3 }} className="relative flex justify-center items-center h-full">
-            <img src={chefRecommendsImg} alt="Dilkhush Kabab" className="w-full h-auto object-contain scale-[1.35] lg:scale-[1.2] origin-left" referrerPolicy="no-referrer" loading="lazy" />
+            <img src={chefRecommendsImg} alt="Chicken Dilkhush Kabab" className="w-full h-auto object-contain scale-[1.35] lg:scale-[1.2] origin-left" referrerPolicy="no-referrer" loading="lazy" />
           </motion.div>
         </div>
       </section>

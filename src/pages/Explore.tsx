@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown, MapPin, Clock, Phone, Mail, Star, CheckCircle2, ChevronRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowDown, MapPin, Clock, Phone, Mail, Star, CheckCircle2, ChevronRight, X } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { useLanguage, FadeText } from '../LanguageContext';
@@ -38,6 +38,7 @@ const AMBIENCE_IMAGES = [
 
 export default function Explore() {
   const { language, t } = useLanguage();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = `${t('hotel_name')} | ${t('nav_explore')}`;
@@ -58,11 +59,10 @@ export default function Explore() {
           <img
             src={exploreHero}
             alt="Hotel Rajmudra Exterior"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover brightness-[0.35]"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-deep-forest/60 backdrop-blur-[2px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-deep-forest/40 via-transparent to-deep-forest" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deep-forest/20 to-deep-forest" />
         </motion.div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl">
@@ -127,11 +127,14 @@ export default function Explore() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-gold-accent/10">
+            <div 
+              className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-gold-accent/10 cursor-pointer group"
+              onClick={() => setSelectedImage(exploreExperience)}
+            >
               <img
                 src={exploreExperience}
                 alt="Dining Space"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 referrerPolicy="no-referrer"
                 loading="lazy"
               />
@@ -183,6 +186,7 @@ export default function Explore() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="group relative aspect-square rounded-3xl overflow-hidden cursor-pointer border border-gold-accent/10"
+                onClick={() => setSelectedImage(dish.image)}
               >
                 <img
                   src={dish.image}
@@ -214,7 +218,8 @@ export default function Explore() {
             <div className="col-span-2 row-span-2">
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="h-full rounded-3xl overflow-hidden shadow-2xl border border-white/5"
+                className="h-full rounded-3xl overflow-hidden shadow-2xl border border-white/5 cursor-pointer"
+                onClick={() => setSelectedImage(AMBIENCE_IMAGES[0].url)}
               >
                 <img src={AMBIENCE_IMAGES[0].url} alt={AMBIENCE_IMAGES[0].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
@@ -222,7 +227,8 @@ export default function Explore() {
             <div className="col-span-2">
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/5"
+                className="aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/5 cursor-pointer"
+                onClick={() => setSelectedImage(AMBIENCE_IMAGES[1].url)}
               >
                 <img src={AMBIENCE_IMAGES[1].url} alt={AMBIENCE_IMAGES[1].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
@@ -230,7 +236,8 @@ export default function Explore() {
             <div>
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/5"
+                className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/5 cursor-pointer"
+                onClick={() => setSelectedImage(AMBIENCE_IMAGES[2].url)}
               >
                 <img src={AMBIENCE_IMAGES[2].url} alt={AMBIENCE_IMAGES[2].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
@@ -238,7 +245,8 @@ export default function Explore() {
             <div>
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/5"
+                className="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/5 cursor-pointer"
+                onClick={() => setSelectedImage(AMBIENCE_IMAGES[3].url)}
               >
                 <img src={AMBIENCE_IMAGES[3].url} alt={AMBIENCE_IMAGES[3].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
@@ -246,7 +254,8 @@ export default function Explore() {
             <div className="col-span-2 md:col-span-4">
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border border-white/5"
+                className="aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border border-white/5 cursor-pointer"
+                onClick={() => setSelectedImage(AMBIENCE_IMAGES[4].url)}
               >
                 <img src={AMBIENCE_IMAGES[4].url} alt={AMBIENCE_IMAGES[4].title} className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
               </motion.div>
@@ -375,6 +384,40 @@ export default function Explore() {
       </section>
 
       <Footer />
+
+      {/* FULLSCREEN IMAGE MODAL */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 cursor-zoom-out"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button 
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 bg-black/20 rounded-full hover:bg-black/40 backdrop-blur-md"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3, type: "spring", bounce: 0.2 }}
+              src={selectedImage}
+              alt="Fullscreen View"
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()} // Prevent click on image from closing modal
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

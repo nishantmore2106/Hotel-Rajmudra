@@ -21,9 +21,9 @@ export const Header = () => {
         <div className="px-6 md:px-10 lg:px-16 py-5 flex items-center justify-between">
           {/* Logo — Script Style like Wilma */}
           <Link to="/" className="flex items-center gap-3 cursor-pointer group shrink-0">
-            <img src={IMAGES.hero.logo} alt="Hotel Rajmudra Logo" className="w-9 h-9 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
-            <span className="font-display text-[28px] md:text-[32px] text-cream font-light italic tracking-wide leading-none">
-              Rajmudra
+            <img src={IMAGES.hero.logo} alt="Hotel Rajmudra Logo" className="w-12 h-12 md:w-14 md:h-14 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
+            <span className="font-display text-[26px] md:text-[32px] text-cream font-light italic tracking-wide leading-none">
+              Hotel Rajmudra
             </span>
           </Link>
 

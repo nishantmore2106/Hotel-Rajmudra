@@ -4,6 +4,7 @@ import { Search, Info, Utensils } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { useLanguage, FadeText } from '../LanguageContext';
+import menuHeroImg from '../../assets/image copy 6.png';
 
 type MenuItem = {
   name: { en: string; mr: string };
@@ -161,7 +162,7 @@ function MenuHero() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(200,163,95,0.08),transparent_80%)] pointer-events-none" />
       
       <img 
-        src="/assets/image copy 6.png" 
+        src={menuHeroImg} 
         alt="Rajmudra Hero"
         draggable={false}
         className="relative z-10 w-full h-full object-contain p-4 md:p-12"

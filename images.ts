@@ -15,12 +15,14 @@ import solkadhi from './assets/explore/solkadhi.png';
 import taak from './assets/explore/taak.png';
 import bisleri from './assets/explore/bisleri.png';
 import lassi from './assets/explore/lassi.png';
-import evPump1 from './assets/explore/WhatsApp Image 2026-06-22 at 8.15.35 PM.jpeg';
 import evPump2 from './assets/explore/WhatsApp Image 2026-06-22 at 8.15.35 PM (1).jpeg';
 import evPump3 from './assets/explore/WhatsApp Image 2026-06-22 at 8.15.35 PM (2).jpeg';
 import evPump4 from './assets/explore/WhatsApp Image 2026-06-22 at 8.15.35 PM (3).jpeg';
 
 import heroMain from './assets/image copy 8.png';
+
+import evPump5 from './images/image copy 5.png';
+import evPump6 from './images/image copy 6.png';
 
 export const IMAGES = {
   hero: {
@@ -47,5 +49,5 @@ export const IMAGES = {
     bisleri: bisleri,
     lassi: lassi
   },
-  evPump: [evPump1, evPump2, evPump3, evPump4]
+  evPump: [evPump2, evPump3, evPump5, evPump6]
 };
