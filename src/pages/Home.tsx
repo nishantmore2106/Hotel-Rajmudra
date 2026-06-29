@@ -622,29 +622,26 @@ export default function Home() {
               <FadeText>More Flavor For Less</FadeText>
             </motion.p>
             <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 1 }} className="font-display text-cream font-light italic leading-[0.95] mb-8" style={{ fontSize: 'clamp(48px, 10vw, 120px)' }}>
-              <FadeText>{t('hero_title')}</FadeText>
+              <FadeText>{t('hero_title_1')}</FadeText>
+              <br />
+              <FadeText>{t('hero_title_2')}</FadeText>
             </motion.h1>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.4 }} className="text-cream/60 text-sm md:text-base font-sans font-light max-w-xl leading-relaxed mb-8">
               <FadeText>{t('hero_subtitle')}</FadeText>
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.5 }} className="flex items-center justify-center gap-4 mb-10">
-              <div className="flex items-center gap-2 px-5 py-2 bg-black/30 backdrop-blur-md border border-green-500/30 rounded-full">
-                <div className="w-4 h-4 border-2 border-green-500 p-0.5 flex items-center justify-center rounded-sm">
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+              <div className="flex items-center gap-2 px-5 py-2 bg-white backdrop-blur-md border border-green-500/30 rounded-full shadow-lg">
+                <div className="w-4 h-4 border-2 border-green-600 p-0.5 flex items-center justify-center rounded-sm">
+                  <div className="w-2 h-2 bg-green-600 rounded-full" />
                 </div>
-                <span className="text-green-400 font-sans text-[11px] font-semibold uppercase tracking-[0.15em]">Veg</span>
+                <span className="text-green-700 font-sans text-[11px] font-bold uppercase tracking-[0.15em]">Veg</span>
               </div>
-              <div className="flex items-center gap-2 px-5 py-2 bg-black/30 backdrop-blur-md border border-red-500/30 rounded-full">
-                <div className="w-4 h-4 border-2 border-red-500 p-0.5 flex items-center justify-center rounded-sm">
-                  <div className="w-2 h-2 bg-red-500 rounded-full" />
+              <div className="flex items-center gap-2 px-5 py-2 bg-white backdrop-blur-md border border-red-500/30 rounded-full shadow-lg">
+                <div className="w-4 h-4 border-2 border-red-600 p-0.5 flex items-center justify-center rounded-sm">
+                  <div className="w-2 h-2 bg-red-600 rounded-full" />
                 </div>
-                <span className="text-red-400 font-sans text-[11px] font-semibold uppercase tracking-[0.15em]">Non-Veg</span>
+                <span className="text-red-700 font-sans text-[11px] font-bold uppercase tracking-[0.15em]">Non-Veg</span>
               </div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.6 }}>
-              <button onClick={() => window.location.href = '/menu'} className="px-10 py-3 border border-gold-accent/50 text-gold-accent font-sans text-[12px] font-medium uppercase tracking-[0.25em] rounded-none hover:bg-gold-accent hover:text-deep-forest transition-all duration-500">
-                <FadeText>{t('view_menu')}</FadeText>
-              </button>
             </motion.div>
           </div>
         </div>
